@@ -1,0 +1,2 @@
+project-folder/
+ └─ index.html
