@@ -70,6 +70,11 @@ button:hover {
   background:#d32f2f;
 }
 
+.cs-btn {
+  background:#0d47a1;
+  color:#fff;
+}
+
 .progress-container {
   width:85%;
   height:18px;
@@ -152,10 +157,13 @@ button:hover {
   <div class="history-container" id="historyContainer"></div>
 </div>
 
+<!-- Popup -->
 <div class="modal" id="popupModal">
   <div class="modal-content">
-    <h2>🎉 Selamat!</h2>
+    <h2>💖 Selamat!💖</h2>
     <p id="popupMessage"></p>
+    <p style="font-size:13px;color:#555;">Silahkan screenshot dan kirim ke Admin / CS.</p>
+    <a href="https://rinjanipuncak.com" target="_blank"><button class="cs-btn">💬 Hubungi CS</button></a>
     <button onclick="closePopup()">Tutup</button>
   </div>
 </div>
@@ -165,26 +173,27 @@ const validVoucher = "2026MAXWIN";
 const userClaimed = {};
 const historyContainer = document.getElementById("historyContainer");
 
+// 20 User ID awal
 let historyData = [
-  {userId:"RJP84921", freebet:12500},
+  {userId:"RJP84921", freebet:20000},
   {userId:"MAX77103", freebet:25000},
   {userId:"JPX66219", freebet:18000},
-  {userId:"WIN90452", freebet:10000},
+  {userId:"WIN90452", freebet:100000},
   {userId:"RIN33481", freebet:50000},
-  {userId:"SPN72819", freebet:15000},
+  {userId:"SPN72819", freebet:150000},
   {userId:"GAC55302", freebet:22000},
   {userId:"RTP90117", freebet:30000},
-  {userId:"BET66741", freebet:12000},
+  {userId:"BET66741", freebet:120000},
   {userId:"LUX88190", freebet:75000},
   {userId:"VIP20418", freebet:20000},
-  {userId:"JPQ44771", freebet:14000},
+  {userId:"JPQ44771", freebet:140000},
   {userId:"MAX99812", freebet:100000},
-  {userId:"SPN30177", freebet:16500},
+  {userId:"SPN30177", freebet:165000},
   {userId:"RJP77564", freebet:28000},
   {userId:"GOL66291", freebet:35000},
-  {userId:"RTP42018", freebet:19000},
+  {userId:"RTP42018", freebet:190000},
   {userId:"BET90331", freebet:45000},
-  {userId:"WIN11872", freebet:11000},
+  {userId:"WIN11872", freebet:110000},
   {userId:"VIP77205", freebet:60000}
 ];
 
@@ -199,7 +208,7 @@ function renderHistory() {
 }
 renderHistory();
 
-function claimFreebet(){
+function claimFreebet() {
   const userId = document.getElementById("userId").value.trim();
   const voucher = document.getElementById("voucher").value.trim();
   const message = document.getElementById("message");
@@ -233,21 +242,24 @@ function claimFreebet(){
       clearInterval(interval);
       progressContainer.style.display = "none";
 
-      const freebet = Math.floor(Math.random()*180000)+20000;
+      // Nominal bilangan bulat ribuan
+      const freebet = Math.floor(Math.random() * (200 - 20 + 1) + 20) * 1000;
       userClaimed[userId] = freebet;
 
+      // Update riwayat
       historyData.unshift({userId, freebet});
       if(historyData.length > 20) historyData.pop();
       renderHistory();
 
+      // Tampilkan popup
       document.getElementById("popupMessage").innerHTML =
-        "User ID: <b>"+userId+"</b><br>Freebet: <b>IDR "+freebet.toLocaleString('id-ID')+"</b>";
+        `User ID: <b>${userId}</b><br>Freebet: <b>IDR ${freebet.toLocaleString('id-ID')}</b>`;
       document.getElementById("popupModal").style.display = "flex";
     }
   },20);
 }
 
-function closePopup(){
+function closePopup() {
   document.getElementById("popupModal").style.display = "none";
 }
 </script>
